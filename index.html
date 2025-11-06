@@ -2,17 +2,19 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Tabela SQL Simulada</title>
+  <title>Tabela Interativa</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Simulador de Tabela SQL</h1>
+  <h1>Gerenciador de Pessoas</h1>
 
   <form id="form">
     <input type="text" id="nome" placeholder="Nome" required>
     <input type="number" id="idade" placeholder="Idade" required>
     <button type="submit">Inserir</button>
   </form>
+
+  <input type="text" id="pesquisa" placeholder="Pesquisar por nome..." oninput="filtrarTabela()">
 
   <table id="tabela">
     <thead>
