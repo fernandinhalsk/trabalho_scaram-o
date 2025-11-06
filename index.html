@@ -2,20 +2,29 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Simulador de SQL</title>
+  <title>Tabela SQL Simulada</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Simulador de Comandos SQL</h1>
+  <h1>Simulador de Tabela SQL</h1>
 
-  <div class="controls">
-    <button onclick="insertData()">INSERT</button>
-    <button onclick="alterData()">ALTER</button>
-    <button onclick="deleteData()">DELETE</button>
-    <button onclick="selectData()">SELECT</button>
-  </div>
+  <form id="form">
+    <input type="text" id="nome" placeholder="Nome" required>
+    <input type="number" id="idade" placeholder="Idade" required>
+    <button type="submit">Inserir</button>
+  </form>
 
-  <pre id="output"></pre>
+  <table id="tabela">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
   <script src="script.js"></script>
 </body>

@@ -1,28 +1,40 @@
-let table = [];
+let dados = [];
+let idAtual = 1;
 
-function insertData() {
-  table.push({ id: table.length + 1, name: "Item " + (table.length + 1) });
-  document.getElementById("output").textContent = "INSERT realizado:\n" + JSON.stringify(table, null, 2);
+document.getElementById("form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const nome = document.getElementById("nome").value;
+  const idade = document.getElementById("idade").value;
+
+  dados.push({ id: idAtual++, nome, idade });
+  atualizarTabela();
+  this.reset();
+});
+
+function atualizarTabela() {
+  const tbody = document.querySelector("#tabela tbody");
+  tbody.innerHTML = "";
+
+  dados.forEach((item) => {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${item.id}</td>
+      <td contenteditable="true" onblur="alterar(${item.id}, 'nome', this.innerText)">${item.nome}</td>
+      <td contenteditable="true" onblur="alterar(${item.id}, 'idade', this.innerText)">${item.idade}</td>
+      <td><button onclick="deletar(${item.id})">Deletar</button></td>
+    `;
+
+    tbody.appendChild(tr);
+  });
 }
 
-function alterData() {
-  if (table.length > 0) {
-    table[0].name = "Item Alterado";
-    document.getElementById("output").textContent = "ALTER realizado:\n" + JSON.stringify(table, null, 2);
-  } else {
-    document.getElementById("output").textContent = "Nenhum dado para alterar.";
-  }
+function alterar(id, campo, valor) {
+  const item = dados.find(d => d.id === id);
+  if (item) item[campo] = valor;
 }
 
-function deleteData() {
-  if (table.length > 0) {
-    table.pop();
-    document.getElementById("output").textContent = "DELETE realizado:\n" + JSON.stringify(table, null, 2);
-  } else {
-    document.getElementById("output").textContent = "Nenhum dado para deletar.";
-  }
-}
-
-function selectData() {
-  document.getElementById("output").textContent = "SELECT realizado:\n" + JSON.stringify(table, null, 2);
+function deletar(id) {
+  dados = dados.filter(d => d.id !== id);
+  atualizarTabela();
 }
